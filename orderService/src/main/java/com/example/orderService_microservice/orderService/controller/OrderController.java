@@ -5,7 +5,9 @@ import com.example.orderService_microservice.orderService.dto.external_restauran
 import com.example.orderService_microservice.orderService.entity.Order;
 import com.example.orderService_microservice.orderService.entity.OrderStatus;
 import com.example.orderService_microservice.orderService.service.OrderService;
+import com.example.orderService_microservice.orderService.service.OrderServiceEventDriver;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,12 +17,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
 
-    private final OrderService orderService;
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private OrderServiceEventDriver serviceEventDriver;
 
     // ✅ Create a new order
-    @PostMapping
+    @PostMapping("/")
     public Order createOrder(@RequestBody OrderDto orderDto) {
         return orderService.createOrder(orderDto);
+    }
+
+    @PostMapping("/event")
+    public Order createOrderEventDriven(@RequestBody OrderDto orderDto)
+    {
+        return serviceEventDriver.createOrder(orderDto);
     }
 
     // ✅ Get order by ID

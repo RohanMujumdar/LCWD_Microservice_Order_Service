@@ -2,6 +2,43 @@ spring:
   application:
     name: orderService
 
+  cloud:
+    function:
+      web:
+        path: "/api"
+
+#     We are combining 2 functions.
+#      definition: test|test2|orderAcknowledgementReceived
+      definition: orderAcknowledgementReceived
+
+    stream:
+      bindings:
+        orderAcknowledgementReceived-in-1:
+          destination: order.event1
+          content-type: application/json
+          group: ${spring.application.name}
+
+
+#       Name of the Binding, type of Binding(input/output), It's Index.
+        orderCreated-out-0:
+
+#         Tells Rabbit MQ in which queue the above event should go. Exchange will push it
+#         that particular queue.
+          destination: order.event
+          content-type: application/json
+
+#         We are grouping the events of a particular application.
+          group: ${spring.application.name}
+
+
+
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
   datasource:
     url: jdbc:mysql://localhost:3306/lcwd
     username: root
@@ -15,12 +52,16 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
+
 eureka:
   client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
   instance:
     prefer-ip-address: true
+
 
 server:
   port: 9091

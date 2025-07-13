@@ -9,6 +9,7 @@ import com.example.orderService_microservice.orderService.repository.OrderReposi
 import com.example.orderService_microservice.orderService.service.external_restaurantService.RestWebClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private RestWebClientService restWebClientService;
+
 
     @Override
     public Order createOrder(OrderDto orderDto) {
