@@ -12,6 +12,11 @@ spring:
       definition: orderAcknowledgementReceived
 
     stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+
+
       bindings:
         orderAcknowledgementReceived-in-1:
           destination: order.event1
@@ -33,11 +38,11 @@ spring:
 
 
 
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
 
   datasource:
     url: jdbc:mysql://localhost:3306/lcwd
