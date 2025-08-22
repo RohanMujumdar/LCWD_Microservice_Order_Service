@@ -1,6 +1,7 @@
 package com.example.orderService_microservice.orderService.functions;
 
 import com.example.orderService_microservice.orderService.dto.OrderDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.Message;
@@ -10,6 +11,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 @Configuration
+@Slf4j
 public class OrderFunctions {
 
     @Bean
@@ -51,8 +53,8 @@ public class OrderFunctions {
 
         return stringMessage -> {
             String str = stringMessage.getPayload();
-            System.out.println("Entered receiving method");
-            System.out.println("Message Recieved from PaymentDeliveryService: "+str);
+            log.info("Entered receiving method");
+            log.info("Message Recieved from PaymentDeliveryService: "+str);
         };
     }
 }

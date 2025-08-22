@@ -1,5 +1,6 @@
 package com.example.orderService_microservice.orderService.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import com.example.orderService_microservice.orderService.dto.OrderDto;
@@ -10,9 +11,11 @@ import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
+import java.util.function.Consumer;
 
 
 @Service
+@Slf4j
 public class OrderServiceEventDriver {
 
     @Autowired
@@ -39,7 +42,7 @@ public class OrderServiceEventDriver {
         Message<OrderDto> message = MessageBuilder.withPayload(dto).build();
 
         streamBridge.send("orderCreated-out-0", message);
-        System.out.println("Order created");
+        log.info("Order created");
 
         return order;
 
