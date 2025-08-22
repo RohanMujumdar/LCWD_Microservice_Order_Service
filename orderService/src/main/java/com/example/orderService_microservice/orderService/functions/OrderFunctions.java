@@ -37,11 +37,11 @@ public class OrderFunctions {
     public Function<OrderDto, String> createOrder()
     {
         return orderDto -> {
-            System.out.println("Creating Order");
-            System.out.println(orderDto.getId());
-            System.out.println(orderDto.getTotalAmount());
-            System.out.println(orderDto.getStatus());
-            System.out.println(orderDto.getPaymentMode());
+            log.info("Creating Order");
+            log.info(orderDto.getId());
+            log.info(orderDto.getTotalAmount().toString());
+            log.info(orderDto.getStatus().toString());
+            log.info(orderDto.getPaymentMode().toString());
 
             return "order created with Id: " + orderDto.getId();
         };
