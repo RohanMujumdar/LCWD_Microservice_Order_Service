@@ -9,9 +9,7 @@ import com.example.orderService_microservice.orderService.entity.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
-
 import java.util.UUID;
-import java.util.function.Consumer;
 
 
 @Service
